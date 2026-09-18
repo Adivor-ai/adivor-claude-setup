@@ -24,14 +24,14 @@ Para actualizar a mano en cualquier momento:
 | Carpeta | Contenido |
 |---|---|
 | `agents/` | 16 subagentes: `code-reviewer`, `security-sentinel`, `test-engineer`, `verify-app`, `implementer`, `research-agent`, `feature-analyst`, `github-workflow`, `worktree-worker`, `docs-keeper`, `oncall-guide`, `code-simplifier`, `build-validator`, `design-auditor`, `ux-designer`, `claude-md-keeper` |
-| `commands/` | 16 slash commands (ver tabla abajo) |
+| `commands/` | 15 slash commands (ver tabla abajo) |
 | `skills/` | Skills del equipo, incluidas las 8 de diseño (ver tabla abajo) |
 | `hooks/` | `proteger-main.sh` (bloquea push directo a main/master/develop) y el motor `skill-eval` |
 | `rules/` | Reglas globales |
 | `settings.json` | Referencia para copiar a mano: bloque `deny` portable y reparto activa/off de skills. No se aplica solo (ver abajo) |
 | `settings.windows.json` | 8 reglas `deny` adicionales, solo para Windows |
 
-### Los 16 comandos
+### Los 16 comandos con barra
 
 | Comando | Cuándo se usa |
 |---|---|
@@ -47,7 +47,7 @@ Para actualizar a mano en cualquier momento:
 | `/research` | Explora código que no conoces y produce un mapa de arquitectura |
 | `/simplify` | Propone simplificaciones de los cambios recientes, sin cambiar comportamiento |
 | `/pr-summary` | Redacta el resumen de un PR a partir del diff |
-| `/cove` | Chain-of-Verification: el modelo verifica su propia respuesta antes de darla |
+| `/cove` | Chain-of-Verification: el modelo verifica su propia respuesta antes de darla (viene de `skills/cove`, no de `commands/`) |
 | `/cove-isolated` | Igual que `/cove` pero con subagentes aislados, para máxima exactitud |
 | `/migrate` | Migra un proyecto de Task Master MCP a seguimiento en markdown |
 | `/sync-workflow` | Actualiza el workflow de sincronización desde el repo plantilla |
