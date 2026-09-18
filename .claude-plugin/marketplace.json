@@ -1,0 +1,15 @@
+{
+  "name": "adivor",
+  "owner": {
+    "name": "Adivor",
+    "url": "https://github.com/Adivor-ai"
+  },
+  "plugins": [
+    {
+      "name": "adivor-setup",
+      "source": "./",
+      "description": "Agentes, comandos, skills y hooks del equipo de Adivor para Claude Code.",
+      "version": "0.1.0"
+    }
+  ]
+}

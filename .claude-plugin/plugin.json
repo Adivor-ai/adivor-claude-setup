@@ -1,0 +1,13 @@
+{
+  "name": "adivor-setup",
+  "version": "0.1.0",
+  "description": "Agentes, comandos, skills y hooks del equipo de Adivor para Claude Code.",
+  "author": {
+    "name": "Adivor",
+    "url": "https://github.com/Adivor-ai"
+  },
+  "homepage": "https://github.com/Adivor-ai/adivor-claude-setup",
+  "repository": "https://github.com/Adivor-ai/adivor-claude-setup",
+  "license": "MIT",
+  "keywords": ["adivor", "agents", "skills", "design", "workflow"]
+}

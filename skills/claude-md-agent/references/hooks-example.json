@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "type": "prompt",
+        "prompt": "Before finishing: Were any new patterns, conventions, or gotchas discovered in this session that should be documented in CLAUDE.md? If yes, briefly note what should be added (don't modify files — just leave a suggestion as your final message). If nothing new was learned, say nothing about CLAUDE.md."
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "deny": [
+      "Read(**/.env*)",
+      "Read(**/id_rsa*)",
+      "Read(**/*.pem)",
+      "Read(**/*credential*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(node -e:*)",
+      "Bash(node --eval:*)",
+      "Bash(python -c:*)",
+      "Bash(python3 -c:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin develop:*)",
+      "Bash(git push -u origin main:*)",
+      "Bash(git push -u origin develop:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "autoUpdatesChannel": "latest",
+  "autoDreamEnabled": true,
+  "skillOverrides": {
+    "frontend-designer": "off",
+    "design-taste-frontend-v1": "off",
+    "minimalist-ui": "off",
+    "industrial-brutalist-ui": "off",
+    "high-end-visual-design": "off",
+    "huashu-design": "off"
+  }
+}

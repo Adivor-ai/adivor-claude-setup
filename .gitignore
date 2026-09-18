@@ -1,0 +1,50 @@
+﻿# Credenciales — NUNCA subir
+.credentials
+.last-cleanup
+.last-update-result
+mcp-needs-auth-cache
+stats-cache
+history.jsonl
+*.local.json
+settings.local.json
+.claude.json
+
+# Plugins — cada persona los instala por su cuenta
+plugins/
+
+# Datos de sesión y caché
+sessions/
+session-env/
+shell-snapshots/
+paste-cache/
+image-cache/
+backups/
+cache/
+debug/
+downloads/
+tasks/
+todos/
+statsig/
+agent-memory/
+plans/
+file-history/
+
+# Sistema
+*.log
+Thumbs.db
+desktop.ini
+
+# Audio — NUNCA en el repo. Los .mp3 de huashu-design pesan 26.9 MB y git
+# no puede comprimirlos ni diferenciarlos: cada reemplazo crece el historial
+# para siempre. Se distribuyen aparte (ver skills/huashu-design/AUDIO.md).
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.ogg
+*.flac
+
+# Python compilado
+__pycache__/
+*.pyc
+*.pyo

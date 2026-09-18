@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(powershell:*)",
+      "Bash(powershell.exe:*)",
+      "PowerShell(Invoke-WebRequest*)",
+      "PowerShell(Invoke-RestMethod*)",
+      "PowerShell(iwr*)",
+      "PowerShell(Invoke-Expression*)",
+      "PowerShell(iex*)",
+      "PowerShell(*.env*)"
+    ]
+  }
+}
