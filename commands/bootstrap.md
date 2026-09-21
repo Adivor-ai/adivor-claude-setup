@@ -107,6 +107,31 @@ recién llegado no puede deducir mirando el repo:
 No escribas consejos genéricos de programación. Si una frase valdría para
 cualquier repo del mundo, sobra.
 
+**Con una excepción: cierra siempre con esta sección, literal.** No son consejos
+genéricos, son errores medidos que Claude comete en cualquier repo, y llegan aquí
+para que no se repitan proyecto a proyecto:
+
+```markdown
+## Errores que Claude comete
+
+### Arregla en los dos gemelos
+
+Si corriges lógica duplicada, busca todas sus copias antes de dar por cerrado el
+arreglo. `grep` del patrón, no solo del síntoma. Un arreglo aplicado a una de dos
+copias idénticas deja el bug vivo y da la sensación de estar resuelto.
+
+### Usa el valor detectado, no lo reconstruyas
+
+Si el código ya guardó una ruta, un comando o un nombre real, úsalo. Rearmarlo
+desde sus partes asume una forma canónica que el mundo real no respeta: un script
+llamado `type-check` no es `typecheck`, y la carpeta de alguien no está donde tú
+supones.
+```
+
+Si el proyecto ya acumuló errores propios, añádelos a esa sección con una línea
+de contexto de dónde salió cada uno. Una regla sin su cicatriz se borra a la
+primera que estorba.
+
 **Si `CLAUDE.md` ya existe: no lo sobreescribas.** Ofrece añadir o actualizar
 solo este bloque, y deja intacto todo lo demás:
 

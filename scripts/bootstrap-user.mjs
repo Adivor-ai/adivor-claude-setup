@@ -46,7 +46,15 @@ const NOM = '  [XX] ';
 function leer() {
   if (!existsSync(SETTINGS)) return { datos: {}, existia: false };
   const crudo = readFileSync(SETTINGS, 'utf8').replace(/^﻿/, '');
-  if (!crudo.trim()) return { datos: {}, existia: true };
+  if (!crudo.trim()) {
+    // Vacio no es lo mismo que invalido: no hay datos que perder, asi que
+    // seguimos. Pero lo decimos: un archivo vacio puede ser una truncacion.
+    console.log('');
+    console.log('[aviso] ' + SETTINGS + ' existe pero esta vacio.');
+    console.log('        Se tratara como configuracion nueva. Si esperabas tener');
+    console.log('        ajustes ahi, revisa tus respaldos antes de continuar.');
+    return { datos: {}, existia: true };
+  }
   try {
     return { datos: JSON.parse(crudo), existia: true };
   } catch (e) {
@@ -140,9 +148,13 @@ function verificar() {
     // un fallo del bootstrap, que por diseno nunca pisa lo que ya existe.
     console.log('  [--] ' + s + ' = "' + so[s] + '" por decision tuya, respetado');
   });
+  // Mismo criterio que el bucle OFF de arriba: los dos gemelos distinguen
+  // igual entre "falta" y "la persona eligio otra cosa".
   ACTIVAS.forEach((s) => {
-    if (so[s] === undefined || so[s] === 'on') console.log(OKM + s + ' activa');
-    else { console.log(NOM + s + ' = "' + so[s] + '", deberia estar activa'); fallos++; }
+    if (so[s] === undefined || so[s] === 'on') { console.log(OKM + s + ' activa'); return; }
+    // Presente con otro valor: decision explicita de la persona, no un fallo
+    // del bootstrap, que por diseno nunca pisa lo que ya existe.
+    console.log('  [--] ' + s + ' = "' + so[s] + '" por decision tuya, respetado');
   });
   if (!soloSkills) {
     const deny = (d.permissions && d.permissions.deny) || [];

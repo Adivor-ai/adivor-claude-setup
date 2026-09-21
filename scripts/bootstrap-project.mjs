@@ -82,8 +82,11 @@ function permisosDe(st) {
   const a = ['Bash(git status:*)', 'Bash(git diff:*)', 'Bash(git log:*)',
              'Bash(git add:*)', 'Bash(git branch:*)', 'Bash(git checkout:*)',
              'Bash(ls:*)', 'Bash(cat:*)', 'Bash(rg:*)', 'Bash(find:*)'];
+  // Usa el comando DETECTADO, no lo rearmes desde la clave: si el package.json
+  // declara "type-check", st.comandos.typecheck vale "<gestor> run type-check" y
+  // reconstruirlo desde la clave generaria un permiso que nunca lo autoriza.
   ['dev', 'build', 'test', 'lint', 'typecheck'].forEach((k) => {
-    if (st.comandos[k]) a.push('Bash(' + g + ' run ' + k + ':*)');
+    if (st.comandos[k]) a.push('Bash(' + st.comandos[k] + ':*)');
   });
   if (st.tests.includes('vitest')) a.push('Bash(' + g + ' exec vitest:*)');
   if (st.tests.includes('playwright')) a.push('Bash(' + g + ' exec playwright:*)');
@@ -145,6 +148,14 @@ if (modo === 'dry-run') {
 
 if (fus.faltan.length) {
   mkdirSync(join(RAIZ, '.claude'), { recursive: true });
+  // Mismo contrato que la parte A: respaldo fechado antes de cualquier escritura.
+  if (fus.existia) {
+    const fecha = new Date().toISOString().slice(0, 10);
+    const resp = join(RAIZ, '.claude', 'settings-pre-bootstrap-' + fecha + '.json');
+    writeFileSync(resp, readFileSync(fus.ruta));
+    console.log('');
+    console.log('Respaldo: ' + resp);
+  }
   fus.d.permissions = fus.d.permissions || {};
   fus.d.permissions.allow = ((fus.d.permissions.allow) || []).concat(fus.faltan);
   writeFileSync(fus.ruta, JSON.stringify(fus.d, null, 2) + '\n', 'utf8');
