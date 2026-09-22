@@ -64,3 +64,28 @@ After completing a task: state what changed and how to verify — nothing more.
 ## CLAUDE.md Maintenance
 - When you discover a project-specific pattern or gotcha, suggest adding it to the project's CLAUDE.md.
 - Keep all CLAUDE.md files under 100 lines. If growing beyond that, split into `.claude/rules/`.
+
+## Errores que Claude comete
+
+Reglas nacidas de errores reales cometidos en este repo. Cada una tiene su cicatriz.
+
+### Arregla en los dos gemelos
+
+Si corriges logica duplicada, busca todas sus copias antes de dar por cerrado el
+arreglo. `grep` del patron, no solo del sintoma.
+
+> De donde viene: el verificador de `bootstrap-user.mjs` marcaba como fallo una
+> preferencia que el usuario habia elegido a proposito. Se corrigio en el bucle
+> `OFF` y se dejo intacto el bucle `ACTIVAS`, tres lineas mas abajo, con la misma
+> forma y el mismo defecto. Lo encontro la revision, no quien lo escribio.
+
+### Usa el valor detectado, no lo reconstruyas
+
+Si el codigo ya guardo una ruta, un comando o un nombre real, usalo. Rearmarlo
+desde sus partes asume una forma canonica que el mundo real no respeta.
+
+> De donde viene: `bootstrap-project.mjs` detectaba correctamente que un proyecto
+> usa `pnpm run type-check`, y acto seguido construia el permiso como
+> `Bash(pnpm run typecheck:*)` a partir de la clave interna. El permiso no
+> autorizaba nada. Misma familia que escribir una ruta absoluta de una maquina
+> concreta en vez de leer donde estan las cosas de verdad.

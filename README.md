@@ -11,7 +11,16 @@ Dos líneas dentro de Claude Code:
 /plugin install adivor-setup@adivor
 ```
 
-Reinicia Claude Code. Listo. Los cambios que subamos te llegan en tu siguiente sesión.
+Reinicia Claude Code y corre una vez:
+
+```
+/bootstrap
+```
+
+Eso aplica el reparto de skills y el bloque `deny` en tu configuración, sin que copies
+nada a mano. Te enseña el diff antes de tocar nada y respeta lo que ya tengas.
+
+Los cambios que subamos te llegan en tu siguiente sesión.
 
 Para actualizar a mano en cualquier momento:
 
@@ -24,7 +33,8 @@ Para actualizar a mano en cualquier momento:
 | Carpeta | Contenido |
 |---|---|
 | `agents/` | 16 subagentes: `code-reviewer`, `security-sentinel`, `test-engineer`, `verify-app`, `implementer`, `research-agent`, `feature-analyst`, `github-workflow`, `worktree-worker`, `docs-keeper`, `oncall-guide`, `code-simplifier`, `build-validator`, `design-auditor`, `ux-designer`, `claude-md-keeper` |
-| `commands/` | 15 slash commands (ver tabla abajo) |
+| `commands/` | 16 slash commands, incluido `/bootstrap` (ver tabla abajo) |
+| `scripts/` | Los dos scripts que `/bootstrap` ejecuta: fusión de configuración de usuario y de proyecto |
 | `skills/` | Skills del equipo, incluidas las 8 de diseño (ver tabla abajo) |
 | `hooks/` | `proteger-main.sh` (bloquea push directo a main/master/develop) y el motor `skill-eval` |
 | `rules/` | Reglas globales |
@@ -35,6 +45,7 @@ Para actualizar a mano en cualquier momento:
 
 | Comando | Cuándo se usa |
 |---|---|
+| `/bootstrap` | Configura tu máquina y tu repo sin copiar nada a mano. **Córrelo una vez tras instalar** |
 | `/pr-review` | Revisa un pull request ya abierto contra los estándares del proyecto |
 | `/commit-push-pr` | Atajo que hace commit, push y abre el PR de una vez |
 | `/verify` | Verificación go/no-go antes de mergear: build, tests, tipos, smoke |
@@ -127,8 +138,12 @@ aplique al instalar. Lo importante que contiene:
 ```
 
 **Sin esto, las 8 skills de diseño te llegan activas y compiten entre sí por el mismo
-trigger**, que es justo lo que el reparto evita. Copia ese bloque a tu
-`~/.claude/settings.json` después de instalar.
+trigger**, que es justo lo que el reparto evita.
+
+**No hace falta que lo copies a mano: corre `/bootstrap`.** Lee tu configuración, te
+enseña exactamente qué va a añadir, respeta cualquier valor que ya hubieras elegido,
+hace un respaldo fechado y se verifica solo releyendo el archivo del disco. Correrlo dos
+veces no hace nada la segunda.
 
 ### Qué cubre el bloque `deny`
 
